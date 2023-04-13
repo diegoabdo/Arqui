@@ -160,24 +160,21 @@ exit:
 	int	80h
 
 
-parseInt:
-    xor     eax, eax    
-    xor     ebx, ebx     
-    jmp     .start       
+                 
 
-.loop:
-    mov     al, [esi]   
-    cmp     al, 0       
-    je      .done        
-    sub     al, '0'      
-    imul    ebx, 10      
-    add     eax, ebx     
-    inc     esi         
-    jmp     .loop       
 
-.start:
-    jmp     .loop        
+readInt:
+    sub     esp, 4
 
-.done:
-    ret                   
 
+    mov     eax, 3      
+    mov     ebx, 0      
+    lea     ecx, [esp]  
+    mov     edx, 4      
+    int     0x80       
+
+    mov     eax, [esp]  
+    sub     al, '0'     
+    add     esp, 4      
+
+    ret
