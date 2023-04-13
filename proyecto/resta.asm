@@ -14,7 +14,7 @@ _start:
 
     lea     eax, [num1]
     mov     ebx, 2      
-    call    parseInt
+    call    readInt
 
     mov     eax, msg2
     call    printStr
@@ -22,7 +22,7 @@ _start:
  
     lea     eax, [num2]
     mov     ebx, 2      
-    call    parseInt
+    call    readInt
 
     mov     al, [num1]  ;
     sub     al, [num2]  
@@ -33,7 +33,7 @@ _start:
     call    printString
     mov     eax, [difference]
     call    printInt
-    call    printStrLn
+    call    printStrln
 
     call    exit
 

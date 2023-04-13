@@ -13,17 +13,23 @@ _start:
     call    printStr
     lea     eax, [num1]
     mov     ebx, 2      
-    call    parseInt
+    call    readInt
     mov     eax, msg2
     call    printStr
 
     lea     eax, [num2]
     mov     ebx, 2      
-    call    parseInt
+    call    readInt
 
     mov     al, [num1]  
     xor     ah, ah      
     mov     bl, [num2]  
+    
+    ;Verificar que num2 no sea cero
+    cmp     bl, 0
+    je      divisionPorCeroError
+    
+    
     div     bl          
     mov     [cociente], al 
 
@@ -36,9 +42,14 @@ _start:
 
     ; Finalizar el programa
     call    exit
+    
+divisionPorCeroError:
+    ; Mostrar mensaje de error
+    mov     eax, msg4
+    call    printStrln
 
 SECTION .data
 msg1    db  'Ingrese el primer número: ', 0
 msg2    db  'Ingrese el segundo número: ', 0
 msg3    db  'El resultado de la división es: ', 0
-
+msg4    db  'Error: División por cero', 0

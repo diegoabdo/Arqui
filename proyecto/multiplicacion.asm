@@ -3,7 +3,7 @@
 SECTION .data
     num1    db 0
     num2    db 0
-    product db 0
+    product dw 0
 
 SECTION .text
 global  _start
@@ -14,25 +14,29 @@ _start:
 
     lea     eax, [num1]
     mov     ebx, 2     
-    call    parseInt
+    call    readInt
 
     mov     eax, msg2
     call    printStr
 
     lea     eax, [num2]
     mov     ebx, 2   
-    call    parseInt
+    call    readInt
 
     mov     al, [num1] 
-    imul    al, [num2] 
-    mov     [product], ax   
+    cbw                 ; Extiende al a ax para que sea de 16 bits
 
+    mov     ah, 0       ; Limpia el registro ah para evitar problemas con la multiplicación
+    mov     bl, [num2]   ; Carga el valor de [num2] en el registro bl
+    cbw                 ; Extiende bl a bx para que sea de 16 bits
+    imul    ax, bx      ; Multiplica ax y bx, guarda el resultado en ax
+    mov     [product], ax   
 
     mov     eax, msg3
     call    printStr
     mov     eax, [product]
     call    printInt
-    call    printStrLn
+    call    printStrln
 
     call    exit
 

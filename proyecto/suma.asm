@@ -14,25 +14,24 @@ _start:
 
     lea     eax, [num1]
     mov     ebx, 2     
-    call    parseInt
+    call    readInt
 
     mov     eax, msg2
     call    printStr
 
     lea     eax, [num2]
     mov     ebx, 2      
-    call    parseInt
+    call    readInt
 
     mov     al, [num1]  
     add     al, [num2]  
     mov     [sum], al  
 
     mov     eax, msg3
-    call    printString
+    call    printStr
     mov     eax, [sum]
     call    printInt
-    call    printStrLn
-    call    exit
+    call    printStrln
 
 SECTION .data
 msg1    db  'Ingrese el primer número: ', 0
